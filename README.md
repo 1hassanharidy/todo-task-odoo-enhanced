@@ -13,7 +13,7 @@ This module provides a **To-Do List Management System** for **Odoo 17**, allowin
 ## Installation
 1. Clone this repository into your Odoo `addons` directory:
    ```sh
-   git clone https://github.com/YOUR_GITHUB_USERNAME/todo_management.git
+   git clone https://github.com/1hassanharidy/todo-task-odoo.git
    ```
 2. Restart Odoo server:
    ```sh
