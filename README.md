@@ -50,7 +50,7 @@ This module provides a **To-Do List Management System** for **Odoo 17**, allowin
   - **Due Date**
   - **Assigned User**
 
- ### Chatter (Activity Log)
+ ### 5. Chatter (Activity Log)
 
 The module includes a **Chatter** feature to log important task updates. The following events are tracked:
 
@@ -68,10 +68,10 @@ The module includes a **Chatter** feature to log important task updates. The fol
 
 ## Screenshots
 ### 1. List View
-![List View](https://github.com/user-attachments/assets/ba2d1611-808f-4fb6-892d-3d9fe8507cd3)
+![List View](https://github.com/user-attachments/assets/f5c32d71-cae7-47f3-a00c-352f0628b025)
 
 ### 2. Form View & Task Chatter
-![Form View](https://github.com/user-attachments/assets/f5c32d71-cae7-47f3-a00c-352f0628b025)
+![Form View](https://github.com/user-attachments/assets/ba2d1611-808f-4fb6-892d-3d9fe8507cd3)
 
 ### 3. Module Hierarchy
 ![Hierarchy](https://github.com/user-attachments/assets/f2c90a3f-0d3d-4705-8718-1ce7d9437077)
