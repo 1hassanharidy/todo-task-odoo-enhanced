@@ -50,6 +50,22 @@ This module provides a **To-Do List Management System** for **Odoo 17**, allowin
   - **Due Date**
   - **Assigned User**
 
+ ### Chatter (Activity Log)
+
+The module includes a **Chatter** feature to log important task updates. The following events are tracked:
+
+- **Task Creation:**  
+  - A log entry is added when a new task is created.
+  - Displays the creator's name and timestamp.
+
+- **Assignment Changes:**  
+  - When the **Assigned To** field is updated, a log entry is created.
+  - Displays the previous assignee, the new assignee, and the user who made the change.
+
+- **Due Date Changes:**  
+  - When the **Due Date** of a task is modified, a log entry is added.
+  - Displays the old due date, the new due date, and the user who made the change.
+
 ## Screenshots
 *(Attach relevant screenshots of the module views.)*
 
