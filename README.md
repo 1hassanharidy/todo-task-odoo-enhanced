@@ -67,7 +67,14 @@ The module includes a **Chatter** feature to log important task updates. The fol
   - Displays the old due date, the new due date, and the user who made the change.
 
 ## Screenshots
-*(Attach relevant screenshots of the module views.)*
+### 1. List View
+![List View](https://github.com/user-attachments/assets/ba2d1611-808f-4fb6-892d-3d9fe8507cd3)
+
+### 2. Form View & Task Chatter
+![Form View](https://github.com/user-attachments/assets/f5c32d71-cae7-47f3-a00c-352f0628b025)
+
+### 3. Module Hierarchy
+![Hierarchy](https://github.com/user-attachments/assets/f2c90a3f-0d3d-4705-8718-1ce7d9437077)
 
 ## Contribution
 - Fork this repository.
