@@ -3,10 +3,11 @@
         <field name="name">todo tree</field>
         <field name="model">todo.task</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-danger="(is_late)">
                 <field name="task_name"/>
                 <field name="due_date"/>
                 <field name="status"/>
+                <field name="is_late"/>
             </tree>
         </field>
     </record>
@@ -17,13 +18,30 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                    </header>
                     <group>
                         <field name="task_name"/>
                         <field name="description"/>
                         <field name="assign_to_id"/>
                         <field name="due_date"/>
-                        <field name="status"/>
+                        <field name="is_late"/>
+                        <field name="estimated_time" string="Estimated Time (Hours)"/>
+                        <field name="active" readonly="True"/>
                     </group>
+                    <notebook>
+                        <page string="Timesheet">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+
+                                    <field name="task_date" string="Date"/>
+                                    <field name="task_description" string="Description"/>
+                                    <field name="task_time" string="Time(Hours)"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
@@ -51,6 +69,27 @@
                 <filter name="group_due_date" string="Group by Due Date" context="{'group_by': 'due_date'}"/>
             </search>
         </field>
+    </record>
+
+    <record id="todo_close_server_action" model="ir.actions.server">
+        <field name="name">Close</field>
+        <field name="model_id" ref="model_todo_task"/>
+        <field name="binding_model_id" ref="model_todo_task"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_close()
+        </field>
+    </record>
+
+    <record id="check_due_date_cron" model="ir.cron">
+        <field name="name">Check Task Due Date</field>
+        <field name="model_id" ref="model_todo_task"/>
+        <field name="state">code</field>
+        <field name="code">model.check_due_date()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
     </record>
 
     <record id="todo_action" model="ir.actions.act_window">
