@@ -1,0 +1,137 @@
+<odoo>
+    <record id="todo_task_report" model="ir.actions.report">
+        <field name="name">Task Report</field>
+        <field name="model">todo.task</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">todo_management.todo_task_report_template</field>
+        <field name="binding_model_id" ref="model_todo_task"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="todo_task_report_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <style>
+                        .container {
+                          border: 1px solid #b3adad;
+                          max-width: 600px;   /* Set a max width for readability */
+                          margin: 0 auto;     /* Center the container on the page */
+                          padding: 10px;
+                        }
+
+                        /* Section that holds the top task details:
+                           - TASK
+                           - Due Date
+                           - Assign To
+                           - Estimated Time
+                        */
+                        .task-info {
+                          border: 1px solid #b3adad;
+                          padding: 10px;
+                          margin-bottom: 15px; /* Space below before the description */
+                        }
+
+                        /* Use .task-info p or .task-info div for each line inside the task-info section */
+                        .task-info p {
+                          margin: 4px 0; /* Slight vertical spacing between lines */
+                        }
+
+                        /* Description box: a separate section with its own border */
+                        .description {
+                          border: 1px solid #b3adad;
+                          padding: 10px;
+                          margin-bottom: 15px;
+                        }
+
+                        .timesheet-title {
+                          font-weight: bold;
+                          margin: 10px 0;
+                          text-transform: uppercase; /* Just an example style, feel free to remove */
+                        }
+
+                        /* The timesheet table styling */
+                        .timesheet {
+                          width: 100%;               /* Full width within the container */
+                          border: 1px solid #b3adad; /* Outer border */
+                          border-collapse: collapse; /* Make borders look combined (like in your screenshot) */
+                          margin-bottom: 20px;       /* Space below the table */
+                        }
+
+                        /* Table header cells */
+                        .timesheet th {
+                          border: 1px solid #b3adad;
+                          padding: 5px;
+                          background-color: #f0f0f0; /* Light gray background for header cells */
+                          color: #313030;            /* Dark gray text for readability */
+                          text-align: center;
+                        }
+
+                        /* Table data cells */
+                        .timesheet td {
+                          border: 1px solid #b3adad;
+                          padding: 5px;
+                          text-align: center;  /* Center align as shown in screenshot */
+                          background-color: #ffffff; /* White background for regular cells */
+                          color: #313030;
+                        }
+
+                        .separate-page {
+                        page-break-after: always;
+                        }
+                    </style>
+                    <div class="container separate-page">
+
+                        <!-- Top section: Task info -->
+                        <div class="task-info">
+                          <p><strong>TASK:</strong> <t t-esc="o.task_name"/></p>
+                          <p><strong>Due Date:</strong> <t t-esc="o.due_date"/></p>
+                          <p><strong>Assign To:</strong> <t t-esc="o.assign_to_id.name"/></p>
+                          <p><strong>Estimated Time:</strong> <t t-esc="o.estimated_time"/> H</p>
+                        </div>
+
+                        <!-- Description section -->
+                        <div class="description">
+                          <p><strong>Description:</strong></p>
+                          <p>
+                            <t t-esc="o.description"/>
+                          </p>
+                        </div>
+
+                        <!-- Timesheet section -->
+                        <div class="timesheet-title">Timesheet</div>
+                        <table class="timesheet">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Date</th>
+                              <th>Description</th>
+                              <th>Time</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <t t-set="total_time" t-value="0"/>
+                              <t t-foreach="o.line_ids" t-as="line">
+                                  <tr>
+                                      <td><t t-esc="line.id"/></td>
+                                      <td><t t-esc="line.task_date"/></td>
+                                      <td><t t-esc="line.task_description"/></td>
+                                      <td><t t-esc="line.task_time"/></td>
+                                  </tr>
+                                  <t t-set="total_time" t-value="total_time + line.task_time"/>
+                              </t>
+                              <tr>
+                                  <td colspan="3"><strong>Total Time</strong></td>
+                                  <td><t t-esc="total_time"/> H</td>
+                              </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <br/>
+                </t>
+            </t>
+
+        </t>
+    </template>
+
+</odoo>
